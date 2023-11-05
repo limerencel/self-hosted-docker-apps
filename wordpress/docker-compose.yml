@@ -1,0 +1,25 @@
+  GNU nano 6.2                                              docker-compose.yaml                                                        
+version: '3.1'
+
+services:
+  wordpress:
+    image: wordpress
+    depends_on:
+      - mariadb
+    environment:
+      - WORDPRESS_DB_HOST=mariadb
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=qaz2013614
+      - WORDPRESS_DB_NAME=wordpress
+    ports:
+      - 8080:80
+    volumes:
+      - ./html:/var/www/html
+
+  mariadb:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=qaz2013614
+      - MYSQL_DATABASE=wordpress
+    volumes:
+      - ./database:/var/lib/mysql
